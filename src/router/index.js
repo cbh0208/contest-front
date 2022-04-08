@@ -68,6 +68,15 @@ const routes = [
       isAuthRequired: true,
 
     }
+  },
+  {
+    path:'/contest/:id/',
+    name:'question',
+    component:()=>import('../views/student/Contest.vue'),
+    meta:{
+      title:'竞赛',
+      isAuthRequired: true,
+    }
   }
   
 

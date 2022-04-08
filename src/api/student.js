@@ -3,7 +3,8 @@ import { request } from "./request";
 // 获取可参加的竞赛
 export function getContestReceived(){
     return request({
-        
+        url:'/contest/get_contest_received',
+        method:'get'
     })
 }
 

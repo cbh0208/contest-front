@@ -66,10 +66,16 @@ export function getContestList(){
 }
 
 // 创建竞赛
-export function createContest(){
+export function createContest(name,description,config,time){
     return request({
-        utl:'',
-        method:''
+        url:'contest/create_contest',
+        method:'post',
+        data:{
+            name:name,
+            description:description,
+            config:config,
+            time:time
+        }
 
     })
 }

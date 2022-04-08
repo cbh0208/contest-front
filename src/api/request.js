@@ -1,5 +1,5 @@
 import axios from "axios";
-
+import router from "@/router";
 export function request(config){
     const instance = axios.create({
         baseURL:'http://127.0.0.1:8000/'
@@ -23,11 +23,11 @@ export function request(config){
             return res.data ? res.data : res;
         },
         (error)=>{
-            // if(error.response.status === 401){
-            //     console.log(789456);
-            // }
+
+            if(error.response.status === 401){
+                router.push({ path: "/login" });
+            }
             console.log(error);
-            return error
         }
     )
 
