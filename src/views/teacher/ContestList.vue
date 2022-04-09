@@ -3,7 +3,11 @@
         <el-button type="primary" @click="toCreate">创建竞赛</el-button>
         <el-card style="margin: 5px 0;">
             <template v-slot:header>已发布的竞赛</template>
-            <el-card style="margin: 5px 0;"></el-card>
+
+            <el-card v-for="item in contest1" :key="item.id">
+                <template v-slot:header>{{item.name}} </template>
+                {{item.description}}
+            </el-card>
 
 
         </el-card>

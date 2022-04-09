@@ -136,6 +136,8 @@
 </template>
 <script setup>
 import { ref ,reactive ,computed, toRaw} from 'vue'
+import { useRouter } from "vue-router";
+const router = useRouter();
 import { ElMessage } from 'element-plus'
 import {getBankList,getBank,createContest} from '@/api/teacher'
 const active=ref(0)
