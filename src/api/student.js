@@ -18,6 +18,19 @@ export function getContest(id){
     })
 }
 
+// 暂存题目
+export function temporarySubmit(id,result){
+    return request({
+        url:'',
+        method:'post',
+        data:{
+            id:id,
+            result:result
+        }
+    })
+}
+
+// 提交题目
 export function contestSubmit(id,result){
     return request({
         url:'/contest/contest_submit',

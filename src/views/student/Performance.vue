@@ -8,14 +8,17 @@
 </template>
 <script setup>
 import {ref} from 'vue'
+import { useRouter, useRoute } from 'vue-router'
 import {getGrade} from '@/api/student'
+const route=useRoute()
+const router=useRouter()
 const grade=ref([])
 getGrade().then((res)=>{
     grade.value=res.data
 })
 
 function toDetail(id) {
-    
+    router.push({'path':`/gradeDetails/${id}/`})
 }
 </script>
 <script>

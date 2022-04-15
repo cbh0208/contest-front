@@ -60,6 +60,15 @@ const routes = [
     }
   },
   {
+    path:'/question_edit/:id/',
+    name:'question_edit',
+    component:()=>import('../views/teacher/QuestionEdit'),
+    meta:{
+      title:'编辑题目',
+      isAuthRequired:true
+    }
+  },
+  {
     path:'/CreateContest/',
     name:'CreateContest',
     component:()=>import('../views/teacher/CreateContest.vue'),
@@ -76,6 +85,15 @@ const routes = [
     meta:{
       title:'竞赛',
       isAuthRequired: true,
+    }
+  },
+  {
+    path:'/gradeDetails/:id/',
+    name:'gradeDetails',
+    component:()=>import('../views/student/GradeDetails'),
+    meta:{
+      title:'成绩',
+      isAuthRequired:true
     }
   }
   

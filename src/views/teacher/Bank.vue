@@ -7,14 +7,26 @@
                 <template v-slot:title>
                     <el-tag v-if="o.type==='SC'">单选题</el-tag>
                     <el-tag v-else-if="o.type==='MC'">多选题</el-tag>
+                    <el-tag v-else-if="o.type==='JQ'">判断题</el-tag>
 
                     &nbsp;{{o.question_message}}
                 </template>
-                <div><el-tag type="info">A</el-tag>&nbsp;{{o.option_A}}</div>
-                <div><el-tag type="info">B</el-tag>&nbsp;{{o.option_B}}</div>
-                <div><el-tag type="info">C</el-tag>&nbsp;{{o.option_C}}</div>
-                <div><el-tag type="info">D</el-tag>&nbsp;{{o.option_D}}</div>
+                <div v-if="o.type==='JQ'">
+                    <div><el-tag type="info">A</el-tag>&nbsp;{{o.option_A}}</div>
+                    <div><el-tag type="info">B</el-tag>&nbsp;{{o.option_B}}</div>
+                </div>
+                <div v-else>
+                    <div><el-tag type="info">A</el-tag>&nbsp;{{o.option_A}}</div>
+                    <div><el-tag type="info">B</el-tag>&nbsp;{{o.option_B}}</div>
+                    <div><el-tag type="info">C</el-tag>&nbsp;{{o.option_C}}</div>
+                    <div><el-tag type="info">D</el-tag>&nbsp;{{o.option_D}}</div>
+                </div>
+                
+
+
+
                 <div><el-tag type="success">&nbsp;答案</el-tag>{{o.answer}}</div>
+                <el-button type="primary" @click="edit(o.id)">修改</el-button>
                 <el-popconfirm
                     confirm-button-text='好的'
                     cancel-button-text='不用了'
@@ -47,6 +59,11 @@ getBank(route.params.id).then((res)=>{
 
 function toAdd(id){
     router.push({'path':`/question_add/${id}/`})
+}
+
+
+function edit(id){
+    router.push({'path':`/question_edit/${id}/`})
 }
 
 function deleteIt(id,index){

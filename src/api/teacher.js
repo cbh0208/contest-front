@@ -36,6 +36,26 @@ export function deleteQuestion(id){
     })
 }
 
+// 获取单个题目(用来编辑)
+export function getCurrentQuestion(id){
+    return request({
+        url:`contest/get_current_question/${id}/`,
+        method:'get'
+    })
+}
+
+// 编辑题目
+export function editQuestion(form,id){
+    return request({
+        url:'contest/question_edit',
+        method:'post',
+        data:{
+            'form':form,
+            'id':id
+        }
+    })
+}
+
 // 添加题目
 export function addQuestion(form,id){
     return request({
@@ -80,19 +100,6 @@ export function createContest(name,description,config,time){
     })
 }
 
-// 配置竞赛
-export function configContest(){
-    return request({
-
-    })
-}
-
-// 发布竞赛
-export function publishContest(){
-    return request({
-
-    })
-}
 
 // 获取某竞赛所有成绩
 export function getAllGrade(){
