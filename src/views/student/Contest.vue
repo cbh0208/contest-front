@@ -44,19 +44,25 @@
                 </template>
             </el-popconfirm>
         </div>
+    <button @click="temp">test</button>
+
     </div>
 </template>
 <script setup>
 import { reactive,ref } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import { ElMessage, } from 'element-plus'
-import {getContest,contestSubmit} from '@/api/student'
+import {getContest,contestSubmit,temporarySubmit} from '@/api/student'
 const route=useRoute()
 const router=useRouter()
 const question=ref([])
 const result=ref([])
+console.log(789);
 getContest(route.params.id).then((res)=>{
-    console.log(res);
+    if(res.message){
+        ElMessage(res.message)
+        router.push({'path':`/student/`})
+    }
     question.value=res.data.List
     result.value=res.data.result
 })
@@ -70,6 +76,12 @@ function onSubmit(){
         else{
             ElMessage(res.message)
         }
+    })
+}
+
+function temp(){
+    temporarySubmit(route.params.id,result.value).then((res)=>{
+        ElMessage(res.message)
     })
 }
 

@@ -23,7 +23,7 @@ export function request(config){
             return res.data ? res.data : res;
         },
         (error)=>{
-
+            console.log(error);
             if(error.response.status === 401){
                 router.push({ path: "/login" });
             }

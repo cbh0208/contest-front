@@ -21,10 +21,9 @@ export function getContest(id){
 // 暂存题目
 export function temporarySubmit(id,result){
     return request({
-        url:'',
+        url:`/contest/temporary_submit/${id}/`,
         method:'post',
         data:{
-            id:id,
             result:result
         }
     })
@@ -52,6 +51,7 @@ export function getGrade(){
     })
 }
 
+// 获取成绩细节
 export function getDetail(id){
     return request({
         url:'contest/get_detail',
