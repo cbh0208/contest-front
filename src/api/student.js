@@ -1,6 +1,6 @@
 import { request } from "./request";
 
-// 获取可参加的竞赛
+/** 获取可参加的竞赛 */ 
 export function getContestReceived(){
     return request({
         url:'/contest/get_contest_received',
@@ -8,7 +8,7 @@ export function getContestReceived(){
     })
 }
 
-// 获取竞赛题目
+/** 获取竞赛题目 */ 
 export function getContest(id){
     return request({
         url:`/contest/get_contest/${id}/`,
@@ -18,7 +18,7 @@ export function getContest(id){
     })
 }
 
-// 暂存题目
+/** 暂存题目 */ 
 export function temporarySubmit(id,result){
     return request({
         url:`/contest/temporary_submit/${id}/`,
@@ -29,7 +29,7 @@ export function temporarySubmit(id,result){
     })
 }
 
-// 提交题目
+/** 提交题目 */ 
 export function contestSubmit(id,result){
     return request({
         url:'/contest/contest_submit',
@@ -42,7 +42,7 @@ export function contestSubmit(id,result){
 }
 
 
-// 获取成绩
+/** 获取成绩 */ 
 export function getGrade(){
     return request({
         url:'/contest/get_grade',
@@ -51,10 +51,10 @@ export function getGrade(){
     })
 }
 
-// 获取成绩细节
+/** 获取成绩细节 */ 
 export function getDetail(id){
     return request({
-        url:'contest/get_detail',
+        url:`contest/get_detail/${id}/`,
         method:'get'
     })
 }

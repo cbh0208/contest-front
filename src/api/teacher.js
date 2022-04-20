@@ -1,6 +1,6 @@
 import { request } from "./request";
 
-// 获取题库列表
+/** 获取题库列表 */ 
 export function getBankList(){
     return request({
         url:'contest/bank_list',
@@ -8,7 +8,7 @@ export function getBankList(){
     })
 }
 
-// 获取题库信息(题目列表)
+/** 获取题库信息(题目列表) */ 
 export function getBank(id){
     return request({
         url:`contest/bank/${id}/`,
@@ -16,7 +16,7 @@ export function getBank(id){
     })
 }
 
-// 创建题库
+/** 创建题库 */ 
 export function createBank(form){
     return request({
         url:'contest/bank_add',
@@ -25,7 +25,7 @@ export function createBank(form){
     })
 }
 
-// 删除题目
+/** 删除题目 */ 
 export function deleteQuestion(id){
     return request({
         url:'contest/question_delete',
@@ -36,7 +36,7 @@ export function deleteQuestion(id){
     })
 }
 
-// 获取单个题目(用来编辑)
+/** 获取单个题目(用来编辑) */ 
 export function getCurrentQuestion(id){
     return request({
         url:`contest/get_current_question/${id}/`,
@@ -44,7 +44,7 @@ export function getCurrentQuestion(id){
     })
 }
 
-// 编辑题目
+/** 编辑题目 */ 
 export function editQuestion(form,id){
     return request({
         url:'contest/question_edit',
@@ -56,7 +56,7 @@ export function editQuestion(form,id){
     })
 }
 
-// 添加题目
+/** 添加题目 */ 
 export function addQuestion(form,id){
     return request({
         url:'contest/question_add',
@@ -68,7 +68,7 @@ export function addQuestion(form,id){
     })
 }
 
-// 添加题目(批量)
+/** 添加题目(批量) */ 
 export function addQuestionBatch(formData){
     return request({
         url:'contest/question_add_batch',
@@ -77,7 +77,7 @@ export function addQuestionBatch(formData){
     })
 }
 
-// 获取竞赛列表
+/** 获取竞赛列表 */ 
 export function getContestList(){
     return request({
         url:'contest/get_contest_list',
@@ -85,7 +85,7 @@ export function getContestList(){
     })
 }
 
-// 创建竞赛
+/** 创建竞赛 */ 
 export function createContest(name,description,config,time){
     return request({
         url:'contest/create_contest',
@@ -101,7 +101,7 @@ export function createContest(name,description,config,time){
 }
 
 
-// 获取某竞赛所有成绩
+/** 获取某竞赛所有成绩 */ 
 export function getAllGrade(){
     return request({
 
