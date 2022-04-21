@@ -41,7 +41,6 @@ export function contestSubmit(id,result){
     })
 }
 
-
 /** 获取成绩 */ 
 export function getGrade(){
     return request({

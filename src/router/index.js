@@ -79,6 +79,16 @@ const routes = [
     }
   },
   {
+    path:'/grade/:id/',
+    name:'grade',
+    component:()=>import('../views/teacher/Grade.vue'),
+    meta:{
+      title:'成绩',
+      isAuthRequired: true,
+
+    }
+  },
+  {
     path:'/contest/:id/',
     name:'question',
     component:()=>import('../views/student/Contest.vue'),

@@ -100,10 +100,20 @@ export function createContest(name,description,config,time){
     })
 }
 
+/** 结束竞赛 */
+export function endContest(id){
+    return request({
+        url:`contest/end_contest/${id}/`,
+        method:'post',
+
+    })
+}
 
 /** 获取某竞赛所有成绩 */ 
-export function getAllGrade(){
+export function getAllGrade(id){
     return request({
+        url:`/contest/get_contest_grade/${id}/`,
+        method:'get'
 
     })
 }

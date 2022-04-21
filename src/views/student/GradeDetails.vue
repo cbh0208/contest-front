@@ -30,7 +30,6 @@ const route=useRoute()
 const grade=ref(0)
 const detail=ref({})
 getDetail(route.params.id).then((res)=>{
-    console.log(res);
     detail.value=res.data
     grade.value=res.grade
 })
