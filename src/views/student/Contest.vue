@@ -13,7 +13,15 @@
             </el-card>
             
         </div>
-        
+
+        <div class="time">
+            <el-card>
+                <template v-slot:header><div style="text-align:center"><strong >剩余时间</strong></div></template>
+                <div style="text-align:center"><strong >{{countdown}}</strong></div>
+            </el-card>
+            
+        </div>
+
         <el-form>
             <el-card v-for="(item,index) in question" :key="item.id" style="margin: 5px 0;">
                 <template v-slot:header>
@@ -45,19 +53,23 @@
             </el-popconfirm>
         </div>
     <button @click="temp">test</button>
+    <button @click="toTest">测试</button>
 
     </div>
 </template>
 <script setup>
-import { reactive,ref } from 'vue'
+import { ref } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import { ElMessage, } from 'element-plus'
-import {getContest,contestSubmit,temporarySubmit} from '@/api/student'
+import {getContest,contestSubmit,temporarySubmit,test} from '@/api/student'
 const route=useRoute()
 const router=useRouter()
-const question=ref([])
-const result=ref([])
-console.log(789);
+const question=ref([]) // 试卷
+const result=ref([])    // 答题卡
+const endTime=ref(0)   // 结束时间
+const countdown=ref('')
+
+/** 获取(试卷,答题卡,时间) */
 getContest(route.params.id).then((res)=>{
     if(res.message){
         ElMessage(res.message)
@@ -65,8 +77,14 @@ getContest(route.params.id).then((res)=>{
     }
     question.value=res.data.List
     result.value=res.data.result
+    console.log(res.data.endTime,1);
+    console.log(new Date(res.data.endTime));
+    endTime.value=new Date(res.data.endTime)
+    console.log(endTime.value);
+    
 })
 
+/** 提交(答题卡) */
 function onSubmit(){
     contestSubmit(route.params.id,result.value).then((res)=>{
         if(res.message=='提交成功'){
@@ -79,11 +97,29 @@ function onSubmit(){
     })
 }
 
+/** 暂存(答题卡,时间) */
 function temp(){
-    temporarySubmit(route.params.id,result.value).then((res)=>{
+    temporarySubmit(route.params.id,result.value,endTime.value).then((res)=>{
         ElMessage(res.message)
     })
 }
+
+/** 展示时间(倒计时) */
+function showTime(){
+    let now=new Date()
+    let end=endTime.value
+    let left = end.getTime() - now.getTime() //距离结束时间的毫秒数
+    let leftH= Math.floor(left/(1000*60*60)%24) //计算小时数
+    let leftM = Math.floor(left/(1000*60)%60)  //计算分钟数
+    let leftS = Math.floor(left/1000%60)  //计算秒数
+    countdown.value= leftH + ":" + leftM + ":" + leftS
+
+
+}
+setInterval (function () {
+    showTime()
+}, 1000);  
+
 
 </script>
 <script>
@@ -96,7 +132,7 @@ export default {
 .sheet {
     position: fixed;
     width: 200px;
-    transform: translate(-200px,200px);
+    transform: translate(-210px,200px);
 }
 .grid {
     display: grid;
@@ -107,6 +143,12 @@ export default {
 }
 .grid-item {
     display: inline-block;
+}
+
+.time {
+    position: fixed;
+    width: 200px;
+    transform: translate(830px,200px);
 }
 
 </style>

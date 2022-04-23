@@ -19,12 +19,13 @@ export function getContest(id){
 }
 
 /** 暂存题目 */ 
-export function temporarySubmit(id,result){
+export function temporarySubmit(id,result,endTime){
     return request({
         url:`/contest/temporary_submit/${id}/`,
         method:'post',
         data:{
-            result:result
+            result:result,
+            endTime:endTime
         }
     })
 }
@@ -55,5 +56,13 @@ export function getDetail(id){
     return request({
         url:`contest/get_detail/${id}/`,
         method:'get'
+    })
+}
+
+/**just for test */
+export function test(){
+    return request({
+        url:"contest/test",
+        method:'post'
     })
 }
