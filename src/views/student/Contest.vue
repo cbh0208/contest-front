@@ -5,7 +5,7 @@
                 <template v-slot:header><div style="text-align:center"><strong >答题卡</strong></div></template>
                 <div class="grid" >
                     
-                    <div class="grid-item" v-for="(item,index) in result" :key="item.id">
+                    <div class="grid-item" v-for="(item,index) in result" :key="item.id" @click="jump(item.id)">
                         <el-tag v-if="item.my==''" type="info">{{index+1}}</el-tag>
                         <el-tag v-else>{{index+1}}</el-tag>
                     </div>
@@ -19,11 +19,16 @@
                 <template v-slot:header><div style="text-align:center"><strong >剩余时间</strong></div></template>
                 <div style="text-align:center"><strong >{{countdown}}</strong></div>
             </el-card>
-            
+        </div>
+        <div class="save">
+            <el-card>
+                {{countdownForSave}}秒后保存
+                <el-button @click="temp">立即保存</el-button>
+            </el-card>
         </div>
 
         <el-form>
-            <el-card v-for="(item,index) in question" :key="item.id" style="margin: 5px 0;">
+            <el-card v-for="(item,index) in question" :key="item.id" style="margin: 5px 0;" :id="item.id">
                 <template v-slot:header>
                     <el-tag>{{index+1}}</el-tag>
                     {{item.question_message}}
@@ -52,8 +57,6 @@
                 </template>
             </el-popconfirm>
         </div>
-    <button @click="temp">test</button>
-    <button @click="toTest">测试</button>
 
     </div>
 </template>
@@ -61,13 +64,14 @@
 import { ref } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import { ElMessage, } from 'element-plus'
-import {getContest,contestSubmit,temporarySubmit,test} from '@/api/student'
+import {getContest,contestSubmit,temporarySubmit} from '@/api/student'
 const route=useRoute()
 const router=useRouter()
 const question=ref([]) // 试卷
 const result=ref([])    // 答题卡
 const endTime=ref(0)   // 结束时间
-const countdown=ref('')
+const countdown=ref('') // 倒计时(提交)
+const countdownForSave=ref(60)
 
 /** 获取(试卷,答题卡,时间) */
 getContest(route.params.id).then((res)=>{
@@ -102,24 +106,50 @@ function temp(){
     temporarySubmit(route.params.id,result.value,endTime.value).then((res)=>{
         ElMessage(res.message)
     })
+    countdownForSave.value=60
 }
+
+function jump(id){
+    let element=document.getElementById(id)
+    if(element) element.scrollIntoView({behavior:'smooth'})
+}
+
 
 /** 展示时间(倒计时) */
 function showTime(){
     let now=new Date()
     let end=endTime.value
     let left = end.getTime() - now.getTime() //距离结束时间的毫秒数
+    if(left<=0) onSubmit()
     let leftH= Math.floor(left/(1000*60*60)%24) //计算小时数
     let leftM = Math.floor(left/(1000*60)%60)  //计算分钟数
     let leftS = Math.floor(left/1000%60)  //计算秒数
-    countdown.value= leftH + ":" + leftM + ":" + leftS
+
+    countdown.value= formatNumber(leftH) + ":" + formatNumber(leftM) + ":" + formatNumber(leftS)
 
 
 }
-setInterval (function () {
+/**格式化数字 */
+const formatNumber = (n) => {
+  const s = n.toString()
+  return s[1] ? s : '0' + s
+}
+
+
+/** */
+const t1=setInterval (function () {
     showTime()
 }, 1000);  
 
+/** */
+const t2=setInterval (function(){
+    countdownForSave.value--
+    if(countdownForSave.value===0){
+        console.log(countdownForSave.value);
+        countdownForSave.value=60
+        temp()
+    }
+},1000)
 
 </script>
 <script>
@@ -143,12 +173,19 @@ export default {
 }
 .grid-item {
     display: inline-block;
+    width: 22.5px;
 }
 
 .time {
     position: fixed;
     width: 200px;
     transform: translate(830px,200px);
+}
+
+.save {
+    position: fixed;
+    width: 135px;
+    transform: translate(830px);
 }
 
 </style>
