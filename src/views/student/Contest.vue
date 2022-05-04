@@ -60,6 +60,7 @@
 
     </div>
 </template>
+
 <script setup>
 import { ref } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
@@ -152,6 +153,7 @@ const t2=setInterval (function(){
 },1000)
 
 </script>
+
 <script>
 export default {
     name:"Contest",

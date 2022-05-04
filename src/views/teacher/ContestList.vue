@@ -6,6 +6,7 @@
 
             <el-card v-for="item in contest1" :key="item.id" style="margin: 5px 0;">
                 <template v-slot:header>{{item.name}} <el-button  @click="end(item.id)" style="float:right">结束</el-button> </template>
+                <div>{{item.starttime}}-{{item.endtime}}</div>
                 {{item.description}}
             </el-card>
 
@@ -16,6 +17,7 @@
 
             <el-card v-for="item in contest2" :key="item.id" style="margin: 5px 0;">
                 <template v-slot:header>{{item.name}} <el-button  @click="toDetail(item.id)" style="float:right">查看详情</el-button> </template>
+                <div>{{item.starttime}}-{{item.endtime}}</div>
                 {{item.description}}
             </el-card>
 
