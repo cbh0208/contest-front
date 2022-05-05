@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory } from 'vue-router'
+import { createRouter,createWebHashHistory } from 'vue-router'
 import store from "../store";
 const routes = [
   {
@@ -82,6 +82,23 @@ const routes = [
     path:'/grade/:id/',
     name:'grade',
     component:()=>import('../views/teacher/Grade.vue'),
+    redirect:to=>{
+      return `/grade/${to.params.id}/GradeOverview`
+    },
+    
+    children:[
+      {
+        path:'GradeOverview',
+        name:'GradeOverview',
+        component:()=>import('../views/teacher/GradeOverview')
+      },
+      {
+        path:'GradeAnalysis',
+        alias:'GradeAnalysis',
+        component:()=>import('../views/teacher/GradeAnalysis')
+      },
+
+    ],
     meta:{
       title:'成绩',
       isAuthRequired: true,
@@ -111,7 +128,7 @@ const routes = [
 ]
 
 const router = createRouter({
-  history: createWebHistory(process.env.BASE_URL),
+  history: createWebHashHistory(process.env.BASE_URL),
   routes
 })
 
