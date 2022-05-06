@@ -118,3 +118,9 @@ export function getAllGrade(id){
     })
 }
 
+export function getGradeAnalysis(id){
+    return request({
+        url:`/contest/get_contest_analysis/${id}/`,
+        method:'get'
+    })
+}

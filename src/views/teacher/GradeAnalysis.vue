@@ -1,15 +1,16 @@
 <template>
     <div>
-        GradeAnalysis{{route.params.id}}
+        <Analysis ></Analysis>
     </div>
 </template>
 
 <script setup>
-import {useRoute} from 'vue-router'
-const route=useRoute()
+import Analysis from '../../components/Analysis.vue'
+
 </script>
 <script>
 export default {
+  components: { Analysis },
     name:"GradeAnalysis",
 }
 </script>
