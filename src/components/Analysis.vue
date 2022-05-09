@@ -18,6 +18,7 @@ getGradeAnalysis(route.params.id).then((res)=>{
     nameArr.value=res.data.nameArr
     valueArr.value=res.data.valueArr
     details.value=res.data.details
+    console.log(res.data.details);
     load()
 })
 onMounted(()=>{
@@ -61,12 +62,10 @@ function load(){
             </div>
             <div>
                 错选情况
-                <ul>1</ul>
-                <ul>1</ul>
-                <ul>1</ul>
-            </div>
-            `
+            `+details.value[params.name]['list']+
+            `</div>`
         },
+        position: [100, 10]
     },
     yAxis: {
         data:nameArr.value
