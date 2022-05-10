@@ -25,6 +25,13 @@ export function createBank(form){
     })
 }
 
+/**删除竞赛 */
+export function deleteBank(id){
+    return request({
+        url:`contest/bank_delete/${id}/`,
+        method:'post',
+    })
+}
 /** 删除题目 */ 
 export function deleteQuestion(id){
     return request({
