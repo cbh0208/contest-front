@@ -1,10 +1,8 @@
 <template>
-    <div class="login">
+    <div class="login">   
         <div>
             <el-input v-model="username" placeholder="账户"></el-input>
-        </div>
-        <div style="margin: 5px 0;"></div>
-        <div>
+            <div style="margin: 5px 0;"></div>
             <el-input  v-model="password" placeholder="密码" show-password></el-input>
         </div>
         <div @click="$router.push({ path: '/reg' })">没有账户,立即注册</div>

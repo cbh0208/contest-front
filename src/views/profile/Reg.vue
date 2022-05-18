@@ -1,16 +1,14 @@
 <template>
     <div class="reg">
-        <div >
-            <el-input  v-model="username" placeholder="账户"></el-input>
-        </div>
-        <div style="margin: 5px 0;"></div>
+
         <div>
+            <el-input v-model="username" placeholder="账户"></el-input>
+            <div style="margin: 5px 0;"></div>
             <el-input v-model="password" placeholder="密码" show-password></el-input>
-        </div>
-        <div style="margin: 5px 0;"></div>
-        <div>
+            <div style="margin: 5px 0;"></div>
             <el-input v-model="password_two" placeholder="确认密码" show-password></el-input>
         </div>
+
         <div @click="$router.push({ path: '/login' })">
             已有账户,立即登录
         </div>
