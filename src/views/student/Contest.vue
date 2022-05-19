@@ -125,10 +125,7 @@ function showTime(){
     let leftH= Math.floor(left/(1000*60*60)%24) //计算小时数
     let leftM = Math.floor(left/(1000*60)%60)  //计算分钟数
     let leftS = Math.floor(left/1000%60)  //计算秒数
-
     countdown.value= formatNumber(leftH) + ":" + formatNumber(leftM) + ":" + formatNumber(leftS)
-
-
 }
 /**格式化数字 */
 const formatNumber = (n) => {
@@ -137,12 +134,12 @@ const formatNumber = (n) => {
 }
 
 
-/** */
+/** 结束计时器 */
 const t1=setInterval (function () {
     showTime()
 }, 1000);  
 
-/** */
+/** 暂存计时器*/
 const t2=setInterval (function(){
     countdownForSave.value--
     if(countdownForSave.value===0){

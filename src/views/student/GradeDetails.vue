@@ -14,7 +14,7 @@
                 <div class="grid" >
                     
                     <div class="grid-item" v-for="(item,index) in detail.wrongList" :key="item.id" @click="jump(item.id)">
-                        <el-tag v-if="item.state" type="success">{{index+1}}</el-tag>
+                        <el-tag v-if="item.my==item.answer" type="success">{{index+1}}</el-tag>
                         <el-tag v-else type="danger">{{index+1}}</el-tag>
                     </div>
                 </div>
@@ -30,7 +30,8 @@
                 <div><el-tag type="info">C</el-tag>&nbsp;{{item.option_C}}</div>
                 <div><el-tag type="info">D</el-tag>&nbsp;{{item.option_D}}</div>
                 <div>
-                    我的答案<el-tag type="danger">{{item.my}}</el-tag>
+                    我的答案<el-tag v-if="item.my==item.answer" type="success">{{item.my}}</el-tag>
+                    <el-tag v-else type="danger">{{item.my}}</el-tag>
                     正确答案<el-tag  type="success">{{item.answer}}</el-tag>
                 </div>
             </el-card>

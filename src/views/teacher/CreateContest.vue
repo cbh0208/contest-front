@@ -111,7 +111,7 @@
         <div v-if="active===2" class="Publish">
 
             <div class="block">
-                <span class="demonstration">默认</span>
+                <span class="demonstration">考试时间</span>
                 <el-date-picker
                 v-model="time.range"
                 type="datetimerange"
@@ -120,6 +120,7 @@
                 end-placeholder="结束日期">
                 </el-date-picker>
             </div>
+            考试时长
             <el-input-number v-model="time.duration" controls-position="right" :min="10"  :step="10" label="考试时长"></el-input-number>
         </div>
 
